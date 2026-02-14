@@ -1,0 +1,470 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    /* Paleta más pastel y romántica */
+    background: linear-gradient(180deg, #1b0318 0%, #2b0a23 45%, #120215 100%);
+    color: #fffafc;
+    overflow: hidden;
+}
+
+/* LOGIN */
+.login {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    position: relative;
+    background: radial-gradient(ellipse at 10% 10%, rgba(255,140,160,0.06), transparent 24%),
+                radial-gradient(ellipse at 90% 90%, rgba(255,180,190,0.05), transparent 22%),
+                linear-gradient(180deg, rgba(24,6,20,0.96) 0%, rgba(12,4,12,0.98) 100%);
+    background-size: 200% 200%, 200% 200%, 100% 100%;
+    animation: loginBgMove 12s ease-in-out infinite;
+}
+
+.login-box {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(255,77,109,0.10), rgba(255,143,163,0.06));
+    padding: 26px 30px;
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6), 0 4px 12px rgba(255,77,109,0.08);
+    border: 1px solid rgba(255,77,109,0.12);
+    backdrop-filter: blur(6px);
+    display: inline-block;
+    max-width: 92vw;
+    transform-origin: center;
+    animation: popIn 560ms cubic-bezier(.2,.9,.2,1);
+    position: relative;
+}
+
+/* animación de salida del login */
+.login.fade-out {
+    animation: loginFadeOut 650ms ease forwards;
+}
+
+@keyframes loginFadeOut {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-10px) scale(0.98); }
+}
+
+/* animación de revelado del contenido principal */
+.experience.revealed {
+    animation: revealContent 700ms cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+@keyframes revealContent {
+    0% { opacity: 0; transform: translateY(8px) scale(0.995); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* corazones de ráfaga */
+.burst-heart {
+    position: absolute;
+    color: rgba(255,100,130,0.95);
+    pointer-events: none;
+    user-select: none;
+    animation: burstMove 1400ms cubic-bezier(.2,.8,.2,1) forwards;
+    will-change: transform, opacity;
+}
+
+@keyframes burstMove {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+    30% { transform: translateY(-40px) translateX(-6px) rotate(-10deg); opacity: 0.95; }
+    60% { transform: translateY(-110px) translateX(6px) rotate(12deg); opacity: 0.7; }
+    100% { transform: translateY(-180px) translateX(0) rotate(20deg); opacity: 0; }
+}
+
+/* Saludo dentro del login (ubicado dentro de .login-box) */
+.login-greeting {
+    font-size: 22px;
+    margin: 0 0 12px 0;
+    background: linear-gradient(45deg, #ff8aa6, #ffd7de);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    text-align: center;
+    animation: fadeSlide 700ms ease;
+}
+
+.login-box .controls {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+}
+
+/* Gran corazón decorativo en el fondo del login */
+.login::before {
+    content: '🌹';
+    position: absolute;
+    left: 50%;
+    top: 12%;
+    transform: translateX(-50%);
+    font-size: 200px;
+    color: rgba(255,140,160,0.055);
+    pointer-events: none;
+    user-select: none;
+    filter: blur(2px);
+    animation: floatHeart 6s ease-in-out infinite;
+}
+
+/* Contenedor de corazones pequeños flotantes */
+.hearts {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.heart {
+    position: absolute;
+    font-size: 18px;
+    color: rgba(255,120,145,0.95);
+    opacity: 0.9;
+    transform: translateY(0) scale(1);
+    will-change: transform, opacity;
+    animation: heartRise linear infinite;
+}
+
+.heart:nth-child(1) { left: 8%; bottom: 8%; animation-duration: 6s; animation-delay: 0s; }
+.heart:nth-child(2) { left: 24%; bottom: 6%; animation-duration: 7s; animation-delay: 0.6s; font-size: 22px; }
+.heart:nth-child(3) { left: 40%; bottom: 10%; animation-duration: 5.6s; animation-delay: 1.2s; }
+.heart:nth-child(4) { left: 60%; bottom: 6%; animation-duration: 6.8s; animation-delay: 0.3s; font-size: 20px; }
+.heart:nth-child(5) { left: 78%; bottom: 9%; animation-duration: 7.4s; animation-delay: 0.9s; }
+.heart:nth-child(6) { left: 90%; bottom: 5%; animation-duration: 5.9s; animation-delay: 0.4s; }
+
+@keyframes heartRise {
+    0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.95; }
+    30% { transform: translateY(-50px) translateX(8px) scale(1.06); opacity: 0.92; }
+    60% { transform: translateY(-120px) translateX(-8px) scale(1.1); opacity: 0.78; }
+    90% { transform: translateY(-200px) translateX(8px) scale(1.04); opacity: 0.45; }
+    100% { transform: translateY(-280px) translateX(0) scale(0.9); opacity: 0; }
+}
+
+@keyframes loginBgMove {
+    0% { background-position: 0% 0%, 100% 100%, 0% 0%; }
+    50% { background-position: 100% 50%, 0% 50%, 0% 0%; }
+    100% { background-position: 0% 0%, 100% 100%, 0% 0%; }
+}
+
+/* Elevate login box over decorative layers and add gentle bob */
+.login-box {
+    z-index: 2;
+    animation: popIn 560ms cubic-bezier(.2,.9,.2,1), gentleBob 8s ease-in-out infinite;
+}
+
+@keyframes gentleBob {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+    100% { transform: translateY(0); }
+}
+
+/* Soft pulse for CTA button to draw attention */
+button {
+    animation: pulse 3.6s ease-in-out infinite 1s;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 10px 30px rgba(255,77,109,0.18); transform: scale(1); }
+    50% { box-shadow: 0 22px 44px rgba(255,120,145,0.20); transform: scale(1.02); }
+    100% { box-shadow: 0 10px 30px rgba(255,77,109,0.18); transform: scale(1); }
+}
+
+/* Pequeño brillo animado detrás del botón */
+.login-box::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -24px;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 30px;
+    background: radial-gradient(closest-side, rgba(255,77,109,0.12), transparent 60%);
+    border-radius: 50%;
+    filter: blur(8px);
+    z-index: 0;
+}
+
+
+input {
+    padding: 14px 20px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.06);
+    outline: none;
+    text-align: center;
+    font-size: 18px;
+    background: rgba(255,255,255,0.03);
+    color: #fff;
+    width: 280px;
+    max-width: 78vw;
+    transition: box-shadow 200ms ease, transform 120ms ease;
+}
+
+input::placeholder {
+    color: rgba(255,255,255,0.65);
+}
+
+input:focus {
+    box-shadow: 0 8px 24px rgba(255,77,109,0.12);
+    border-color: rgba(255,77,109,0.28);
+}
+
+button {
+    margin-top: 14px;
+    margin-left: 12px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    font-size: 22px;
+    background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(255,77,109,0.18);
+    cursor: pointer;
+    transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+button:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 18px 40px rgba(255,77,109,0.22);
+}
+
+button:active {
+    transform: translateY(0) scale(0.99);
+}
+
+.login-box .controls {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* EXPERIENCIA */
+.experience {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* FONDO */
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* CONTENEDOR CENTRAL */
+.tree-container {
+    position: absolute;
+    bottom: 12%;
+    width: 100%;
+    text-align: center;
+}
+
+/* La definición de .message estaba duplicada más abajo; se conserva la versión
+   consolidada situada más abajo en el archivo para evitar inconsistencias. */
+
+/* ÁRBOL */
+.tree {
+    width: 10px;
+    height: 0;
+    background: brown;
+    margin: 0 auto;
+    animation: grow 2s forwards;
+}
+
+/* FOTO PRINCIPAL */
+.main-photo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    margin-top: -55px;
+    box-shadow: 0 0 20px #ff4d6d;
+    animation: fadeIn 2s ease;
+    transition: transform 420ms ease, box-shadow 420ms ease, width 420ms ease, height 420ms ease;
+}
+
+/* FOTOS EXTRA */
+.extra-photos {
+    margin-top: 15px;
+}
+
+.extra-photos img {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    margin: 5px;
+    box-shadow: 0 0 10px #ff4d6d;
+    animation: float 4s infinite ease-in-out;
+    transition: transform 420ms ease, box-shadow 420ms ease, width 420ms ease, height 420ms ease;
+}
+
+/* Al desbloquear, hacer las imágenes un poco más grandes y con mayor brillo */
+.experience.revealed .main-photo {
+    transform: translateY(-6px) scale(1.18);
+    box-shadow: 0 0 32px rgba(255,110,140,0.95);
+    /* aumentar también dimensiones explícitas para garantizar el cambio visual */
+    width: 130px;
+    height: 130px;
+}
+
+.experience.revealed .extra-photos img {
+    transform: scale(1.12);
+    box-shadow: 0 0 18px rgba(255,110,140,0.9);
+    width: 68px;
+    height: 68px;
+}
+
+/* ANIMACIONES */
+@keyframes grow {
+    from { height: 0; }
+    to { height: 140px; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
+
+.floating-heart {
+    position: absolute;
+    transform: translateX(-50%);
+    color: #ff4d6d;
+    animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+    0% { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+    40% { transform: translateX(-50%) translateY(-60px) scale(1.02); opacity: 0.95; }
+    70% { transform: translateX(-50%) translateY(-150px) scale(1.05); opacity: 0.7; }
+    100% { transform: translateX(-50%) translateY(-300px) scale(0.9); opacity: 0; }
+}
+
+@keyframes popIn {
+    0% { transform: translateY(8px) scale(0.98); opacity: 0; }
+    60% { transform: translateY(-6px) scale(1.02); opacity: 1; }
+    100% { transform: translateY(0) scale(1); }
+}
+
+/* Primer media query eliminado — se consolida el responsive en la sección
+   "Responsive fino" más abajo para un solo punto de control. */
+/* TÍTULO ANIMADO */
+.title {
+    font-size: 30px;
+    margin-top: -18px; /* subir un poco el título */
+    margin-bottom: 12px;
+    background: linear-gradient(45deg, #ff4d6d, #ff8fa3, #ffffff);
+    -webkit-background-clip: text;
+    background-clip: text; /* propiedad estándar para compatibilidad */
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* necesario en algunos navegadores (Firefox) */
+    display: inline-block;
+    animation: glow 3s infinite alternate, fadeSlide 1.5s ease;
+    text-align: center;
+}
+
+/* Animación brillo */
+@keyframes glow {
+    from { text-shadow: 0 0 5px #ff4d6d; }
+    to { text-shadow: 0 0 20px #ff8fa3; }
+}
+
+/* Animación entrada */
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MENSAJE centrado y no ancho completo */
+.message {
+    width: 70%;
+    max-width: 320px;
+    margin: 0 auto 20px auto;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #ffffffcc;
+    min-height: 60px;
+    text-align: center;
+}
+
+/* Responsive fino */
+@media (max-width: 600px) {
+    .title {
+        font-size: 22px;
+        padding: 0 10px;
+        margin-top: -8px;
+    }
+
+    .message {
+        width: 80%;
+        font-size: 14px;
+    }
+
+    .main-photo {
+        width: 80px;
+        height: 80px;
+    }
+
+    .extra-photos img {
+        width: 44px;
+        height: 44px;
+    }
+
+    /* Ajustes para el login en móvil */
+    .login-box {
+        padding: 18px 20px;
+    }
+
+    input {
+        width: 210px;
+        font-size: 16px;
+    }
+
+    button {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    /* Ajustes para el saludo en móvil */
+    .login-greeting {
+        font-size: 18px;
+        margin-bottom: 10px;
+        padding: 0;
+    }
+}
+
+
