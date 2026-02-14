@@ -5,7 +5,7 @@ const experience = document.querySelector(".experience");
 const music = document.getElementById("music");
 const typingText = document.getElementById("typingText");
 
-const correctPassword = "palomita";
+const correctPassword = "mariela";
 
 unlockBtn.addEventListener("click", () => {
     if (passwordInput.value === correctPassword) {
@@ -163,3 +163,4 @@ function startHearts() {
         setTimeout(() => heart.remove(), 5000);
     }, 800);
 }
+
